@@ -108,6 +108,7 @@ async function postData(companyname, jobtitle, location, startdate, enddate){
         enddate: enddate
     }
 
+    let error;
     try {
         const response = await fetch(url, {
             method: 'POST',
@@ -119,7 +120,12 @@ async function postData(companyname, jobtitle, location, startdate, enddate){
         const data = await response.json();
         
     } catch (error) {
+        error = err;
         console.error('Fetch error:', error);
         document.getElementById("postErr").textContent = "Det gick inte att lägga till pga: " + error;
+    }finally{
+        if(!error){
+            document.getElementById("printed").textContent = "En arbetserfarenhet har laggts till och kan synas på startsidan"
+        }
     }
 }
