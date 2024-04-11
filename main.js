@@ -10,16 +10,22 @@ async function fetchData() {
         for(let entry of experience){
             let id = entry.id;
             const tr = document.createElement("tr");
+            tr.contentEditable = true;
             tr.classList.add("exp");
             const td1 = document.createElement("td");
+            td1.classList.add(id);
             td1.textContent = entry.companyname;
             const td2 = document.createElement("td");
+            td2.classList.add(id);
             td2.textContent = entry.jobtitle;
             const td3 = document.createElement("td");
+            td3.classList.add(id);
             td3.textContent = entry.location;
             const td4 = document.createElement("td");
+            td4.classList.add(id);
             td4.textContent = entry.startdate;
             const td5 = document.createElement("td");
+            td5.classList.add(id);
             td5.textContent = entry.enddate;
             const deleteBtn = document.createElement("button");
             deleteBtn.textContent = "Delete";
@@ -70,7 +76,12 @@ async function deleteEntry(id){
 }
 
 function editEntry(id){
-    console.log("edit" + id);
+    let tdATA = document.getElementsByClassName(id);
+    
+    for (let i = 0; i < tdATA.length; i++) {
+        console.log(tdATA[i].textContent);
+    }
+    
 }
 
 
