@@ -77,9 +77,12 @@ function editEntry(id){
 
 
 const addBtn = document.getElementById("add");
-addBtn.addEventListener("click", (event)=>{
-    event.preventDefault();
+addBtn.addEventListener("click", ()=>{
+    const company = document.getElementById("coName");
+    const jobTitle = document.getElementById("title");
+    const jobLocation = document.getElementById("location");
     const startDate = document.getElementById("startDate");
+    const endDate = document.getElementById("slutDatum");
 console.log(startDate.value);
 
 });
