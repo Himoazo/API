@@ -77,11 +77,45 @@ async function deleteEntry(id){
 
 function editEntry(id){
     let tdATA = document.getElementsByClassName(id);
-    
-    for (let i = 0; i < tdATA.length; i++) {
-        console.log(tdATA[i].textContent);
+    console.log(tdATA.length);
+
+    let expEdit = {
+        companyname: tdATA[0].textContent,
+        jobtitle: tdATA[1].textContent,
+        location: tdATA[2].textContent,
+        startdate: tdATA[3].textContent,
+        enddate: tdATA[4].textContent
+    }
+
+    if (expEdit.companyname && expEdit.jobtitle && expEdit.location && expEdit.startdate){
+        putData(expEdit, id);
+    }else{
+        document.getElementById("editError").textContent = "Vänligen fyll i alla obligatoriska fällt";
     }
     
+}
+
+async function putData(expEdit, id){
+    let error;
+    try {
+        const response = await fetch(`http://localhost:3000/api/workexp/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(expEdit)
+        });
+        const data = await response.json();
+        
+    } catch (error) {
+        error = err;
+        console.error('Fetch error:', error);
+        document.getElementById("editError").textContent = "Det gick inte att redigera pga: " + error;
+    }finally{
+        if(!error){
+            document.getElementById("editError").textContent = "En arbetserfarenhet har redigerats";
+        }
+    }
 }
 
 
