@@ -77,12 +77,49 @@ function editEntry(id){
 
 
 const addBtn = document.getElementById("add");
-addBtn.addEventListener("click", ()=>{
+addBtn.addEventListener("click", (event)=>{
+    event.preventDefault();
     const company = document.getElementById("coName");
     const jobTitle = document.getElementById("title");
     const jobLocation = document.getElementById("location");
     const startDate = document.getElementById("startDate");
     const endDate = document.getElementById("slutDatum");
-console.log(startDate.value);
 
+    let companyname = company.value;
+    let jobtitle = jobTitle.value;
+    let location = jobLocation.value;
+    let startdate = startDate.value;
+    let enddate = endDate.value;
+    
+    if(companyname && jobtitle && location && startdate && enddate){
+        postData(companyname, jobtitle, location, startdate, enddate);
+    }else{
+
+    }
 });
+
+async function postData(companyname, jobtitle, location, startdate, enddate){
+
+    let exp = {
+        companyname: companyname,
+        jobtitle: jobtitle,
+        location: location,
+        startdate: startdate,
+        enddate: enddate
+    }
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(exp)
+        });
+        const data = await response.json();
+        
+    } catch (error) {
+        console.error('Fetch error:', error);
+        document.getElementById("postErr").textContent = "Det gick inte att lägga till pga: " + error;
+    }
+}
