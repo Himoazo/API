@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 
-
+//Pool Variable för att kommunisera med databasen
 const pool = mysql.createPool({
     host: process.env.CV_HOST,
     user: process.env.CV_USER,
@@ -18,8 +18,9 @@ const pool = mysql.createPool({
 
  
 
-
+// Hantera GET requests
 app.get("/api", (req, res) => {
+  //Läst allt från tabellen workexperience
   pool.query("SELECT * FROM workexperience", (err, results) => {
     if (err) {
       console.error(err);
@@ -33,8 +34,9 @@ app.get("/api", (req, res) => {
   });
 });
 
-
+//Hantera POST requests
 app.post("/api", (req, res)=>{
+  //Läser in incommande data från formuläret
   let companyname = req.body.companyname;
   let jobtitle = req.body.jobtitle;
   let location = req.body.location;
@@ -47,6 +49,7 @@ app.post("/api", (req, res)=>{
   }
 
   if(companyname && jobtitle && location && startdate){
+    //Lagra en rad data i tabellen
       pool.execute(`
       INSERT INTO workexperience(companyname, jobtitle, location, startdate, enddate)
       VALUES (?, ?, ?, ?, ?)`,
@@ -68,7 +71,7 @@ app.post("/api", (req, res)=>{
   }
 });
 
-
+//Hantera PUT requests
 app.put('/api/workexp/:id', (req, res) => {
   let id = req.params.id;
   let companyname = req.body.companyname;
@@ -83,6 +86,7 @@ app.put('/api/workexp/:id', (req, res) => {
   }
 
   if(companyname && jobtitle && location && startdate){
+    //Uppdatera en befintlig rad i tabellen
       pool.execute(`
       UPDATE workexperience SET companyname = ?, jobtitle = ?, location = ?, startdate = ?, enddate = ? WHERE id= ?
       `,
@@ -104,8 +108,10 @@ app.put('/api/workexp/:id', (req, res) => {
   }
 });
 
+//Hantera DELETE requests
 app.delete('/api/workexp/:id', (req, res) => {
   let id = req.params.id;
+  //Radera en rad från tabellen
   pool.query("DELETE FROM workexperience WHERE id = ?", [id], (err, results) => {
     if (err) {
       console.error(err);
