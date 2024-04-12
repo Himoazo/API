@@ -14,6 +14,7 @@ const pool = mysql.createPool({
     user: process.env.CV_USER,
     password: process.env.CV_PASSWORD,
     database: process.env.CV_DATABASE,
+    port: process.env.MYSQLPORT,
   waitForConnections: true,
   connectionLimit: 10,
   maxIdle: 10, // max idle connections, the default value is the same as `connectionLimit`
@@ -36,9 +37,9 @@ pool.query(`
      (err, results)=> {
       if(err){
         console.error(err);
-        console.log("Kolla: " + err);
       }else{
         console.log(results);
+        console.log("Table finally created");
       }
     }
   );
