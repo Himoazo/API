@@ -81,7 +81,10 @@ app.put('/api/workexp/:id', (req, res) => {
   let location = req.body.location;
   let startdate = req.body.startdate;
   let enddate = req.body.enddate;
-
+  if (enddate === "Pågående") {
+    enddate = null; 
+  }
+  
   let errors = {
     message: "",
     details: ""
