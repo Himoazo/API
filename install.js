@@ -15,7 +15,7 @@ const pool = mysql.createPool({
     jobtitle VARCHAR(30) NOT NULL,
     location VARCHAR(30) NOT NULL,
     startdate DATE NOT NULL,
-    enddate DATE
+    enddate DATE DEFAULT NULL
   );`,
      (err, results)=> {
       if(err){
