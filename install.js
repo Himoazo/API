@@ -29,11 +29,3 @@ const pool = mysql.createPool({
 
 
 
-/*   CREATE TABLE workexperience (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    companyname VARCHAR(30) NOT NULL,
-    jobtitle VARCHAR(30) NOT NULL,
-    location VARCHAR(30) NOT NULL,
-    startdate DATE,
-    enddate DATE
-) */

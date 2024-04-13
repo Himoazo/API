@@ -23,7 +23,24 @@ const pool = mysql.createPool({
   enableKeepAlive: true,
   keepAliveInitialDelay: 0,
   });
- 
+  
+  pool.query(`
+  CREATE TABLE IF NOT EXISTS workexperience (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    companyname VARCHAR(30) NOT NULL,
+    jobtitle VARCHAR(30) NOT NULL,
+    location VARCHAR(30) NOT NULL,
+    startdate DATE NOT NULL,
+    enddate DATE
+  );`,
+     (err, results)=> {
+      if(err){
+        console.error(err);
+      }else{
+        console.log(results);
+      }
+    }
+  ); 
 
 // Hantera GET requests
 app.get("/api", (req, res) => {
