@@ -5,8 +5,7 @@ Applikationen är byggd på NodeJs och Express server som sköter kommunikatione
 Applikationen i detta repo med en mysql databas lanseras på ett PaaS som heter railway.app vid denna [länk](https://api-production-b4dc.up.railway.app/)
 
 ## Denna webbtjänst hanterar CRUD operations 
-1. **Create** genom att ta emot och bearbeta **POST request** med json data från klienten och lagra datan i databasen.
-2. **Read** genom att ta emot och bearbeta **GET request** som hämtar lagrade data i database.
-3. **Update** genom att ta emot och bearbeta **PUT request** som skickar JSON data som uppdaterar/ändrar en befintlig rad vid angivit id i databasen
-4. **Delete** genom att ta emot och bearbeta **DELETE request** från klienten som raderar en rad vid angivit id i databasen.
-
+-	** Create** genom POST request som skickar JSON data till databasen där den lagras.
+-	** Read ** genom en GET request som hämtar lagrade data i database.
+-	** Update ** genom PUT request som skickar JSON data som uppdaterar/ändrar en befintlig rad vid angivit id i databasen
+-	** Delete ** Genom DELETE request som raderar en rad vid angivit id i databasen.
